@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const basePosts = [
+/*const basePosts = [
     {
         id: 1,
         title: "Titolo del Post",
@@ -38,10 +38,10 @@ const basePosts = [
         tags: ["html"],
         published: false,
     },
-];
+];*/
 
 const AppMain = () => {
-    const [posts, setPosts] = useState(basePosts);
+    const [posts, setPosts] = useState([]);
     const [newPost, setNewPost] = useState({
         title: '',
         image: '',
@@ -51,7 +51,7 @@ const AppMain = () => {
     });
 
 
-    function fetchPosts(url = 'http://localhost:3000/posts') {
+    function fetchData(url = 'http://localhost:3000/posts') {
         fetch(url)
             .then(resp => resp.json())
             .then(post => {
@@ -63,7 +63,7 @@ const AppMain = () => {
             });
     }
     useEffect(() => {
-        fetchPosts();
+        fetchData();
     }, []);
 
 
