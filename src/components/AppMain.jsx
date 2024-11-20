@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 const basePosts = [
@@ -49,6 +49,23 @@ const AppMain = () => {
         tags: '',
         published: false,
     });
+
+
+    function fetchPosts(url = 'http://localhost:3000/posts') {
+        fetch(url)
+            .then(resp => resp.json())
+            .then(post => {
+                console.log(post);
+                setPosts(post);
+            })
+            .catch(error => {
+                console.error('Errore nel recuperare i post', error);
+            });
+    }
+    useEffect(() => {
+        fetchPosts();
+    }, []);
+
 
     const addPost = (e) => {
         e.preventDefault();
