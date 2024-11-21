@@ -176,6 +176,7 @@ function AppMain() {
                             <img src={`http://localhost:3000/imgs/posts/${post.image}`} alt={post.title} />
                             <h5>{post.title}</h5>
                             <p>{post.content}</p>
+                            <p><strong>Tags: </strong>{post.tags.join(', ')}</p>
                         </div>
                         <div>
                             <button className="btn trash" onClick={() => handleDelete(index)}>
