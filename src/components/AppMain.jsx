@@ -40,7 +40,7 @@ import React, { useState, useEffect } from 'react';
     },
 ];*/
 
-const AppMain = () => {
+function AppMain() {
     const [posts, setPosts] = useState([]);
     const [newPost, setNewPost] = useState({
         title: '',
@@ -50,22 +50,22 @@ const AppMain = () => {
         published: false,
     });
 
+    const [postData, setPostData] = useState({})
 
     function fetchData(url = 'http://localhost:3000/posts') {
         fetch(url)
             .then(resp => resp.json())
-            .then(post => {
-                console.log(post);
-                setPosts(post);
+            .then(data => {
+
+                setPostData(data.data);
+                console.log(data.data);
+
             })
             .catch(error => {
                 console.error('Errore nel recuperare i post', error);
             });
     }
-    useEffect(() => {
-        fetchData();
-    }, []);
-
+    useEffect(fetchData, []);
 
     const addPost = (e) => {
         e.preventDefault();
@@ -167,11 +167,13 @@ const AppMain = () => {
                     </button>
                 </form>
             </div>
+
             <ul className="list-group">
-                {posts.map((post, index) => (
-                    <li key={index} className="list-group-item d-flex justify-content-between postCard">
+
+                {postData.length ? postData.map((post, index) => (
+                    <li key={post.index} className="list-group-item d-flex justify-content-between postCard">
                         <div>
-                            <img src={post.image} alt={post.title} />
+                            <img src={`http://localhost:3000/imgs/posts${post.image}`} alt={post.title} />
                             <h5>{post.title}</h5>
                             <p>{post.content}</p>
                         </div>
@@ -181,7 +183,7 @@ const AppMain = () => {
                             </button>
                         </div>
                     </li>
-                ))}
+                )) : <p>None</p>}
             </ul>
         </main>
     );
