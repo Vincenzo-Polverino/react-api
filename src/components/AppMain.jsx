@@ -41,7 +41,7 @@ import React, { useState, useEffect } from 'react';
 ];*/
 
 function AppMain() {
-    const [posts, setPosts] = useState([]);
+    const [postData, setPostData] = useState([])
     const [newPost, setNewPost] = useState({
         title: '',
         image: '',
@@ -50,7 +50,7 @@ function AppMain() {
         published: false,
     });
 
-    const [postData, setPostData] = useState({})
+
 
     function fetchData(url = 'http://localhost:3000/posts') {
         fetch(url)
@@ -173,7 +173,7 @@ function AppMain() {
                 {postData.length ? postData.map((post, index) => (
                     <li key={post.index} className="list-group-item d-flex justify-content-between postCard">
                         <div>
-                            <img src={`http://localhost:3000/imgs/posts${post.image}`} alt={post.title} />
+                            <img src={`http://localhost:3000/imgs/posts/${post.image}`} alt={post.title} />
                             <h5>{post.title}</h5>
                             <p>{post.content}</p>
                         </div>
