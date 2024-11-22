@@ -118,10 +118,8 @@ function AppMain() {
                             value={newPost.tags}
                             onChange={handleChange}
                         >
-                            <option value="html">HTML</option>
-                            <option value="css">CSS</option>
-                            <option value="php">PHP</option>
-                            <option value="js">JS</option>
+                            <option value="html">{newPost.tags}</option>
+
                         </select>
                     </div>
                     <div className="mb-3">
@@ -159,6 +157,8 @@ function AppMain() {
                             <img src={`http://localhost:3000/imgs/posts/${post.image}`} alt={post.title} />
                             <h5>{post.title}</h5>
                             <p>{post.content}</p>
+                            <hr />
+                            <p><strong>Tags: </strong>{post.tags.join(', ')}</p>
 
                         </div>
                         <div>
