@@ -158,7 +158,7 @@ function AppMain() {
                             <h5>{post.title}</h5>
                             <p>{post.content}</p>
                             <hr />
-                            <p><strong>Tags: </strong>{post.tags.join(', ')}</p>
+                            <p><strong>Tags: </strong>{post.tags && post.tags.length ? post.tags.join(', ') : '-'}</p>
 
                         </div>
                         <div>
