@@ -1,41 +1,4 @@
 import React, { useState, useEffect } from 'react';
-{
-    id: 1,
-        title: "Titolo del Post",
-            image: './images/1.jpg',
-                content:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
-        tags: ["html", "css"],
-            published: true,
-    },
-{
-    id: 2,
-        title: "Titolo del Post",
-            image: './images/2.jpg',
-                content:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
-        tags: ["js", "css"],
-            published: true,
-    },
-{
-    id: 3,
-        title: "Titolo del Post",
-            image: './images/3.jpg',
-                content:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
-        tags: ["js", "php"],
-            published: true,
-    },
-{
-    id: 4,
-        title: "Titolo del Post",
-            image: './images/4.jpg',
-                content:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
-        tags: ["html"],
-            published: false,
-    },
-];*/
 
 function AppMain() {
     const [postData, setPostData] = useState([])
@@ -59,18 +22,34 @@ function AppMain() {
                 console.error('Errore nel recuperare i post', error);
             });
     }
-    useEffect(fetchData, []);
+    useEffect(() => {
+        fetchData();
+    }, []);
+
 
     const addPost = (e) => {
         e.preventDefault();
-        setPosts([...posts, newPost]);
-        setNewPost({
-            title: '',
-            image: '',
-            content: '',
-            tags: '',
-            published: false,
-        });
+        fetch('http://localhost:3000/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newPost),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setPostData([...postData, data.data]);
+                setNewPost({
+                    title: '',
+                    image: '',
+                    content: '',
+                    tags: '',
+                    published: false,
+                });
+            })
+            .catch((error) => {
+                console.error('Errore nell\'aggiungere il post', error);
+            });
     };
 
     const handleDelete = (index) => {
@@ -170,7 +149,7 @@ function AppMain() {
                             <img src={`http://localhost:3000/imgs/posts/${post.image}`} alt={post.title} />
                             <h5>{post.title}</h5>
                             <p>{post.content}</p>
-                            <p><strong>Tags: </strong>{post.tags.join(', ')}</p>
+
                         </div>
                         <div>
                             <button className="btn trash" onClick={() => handleDelete(index)}>
