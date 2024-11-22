@@ -53,14 +53,24 @@ function AppMain() {
     };
 
     const handleDelete = (index) => {
-        const newPosts = posts.filter((post, i) => i !== index);
-        setPosts(newPosts);
+
+        fetch(`http://localhost:3000/posts/${postData[index].id}`, {
+            method: 'DELETE',
+        })
+            .then(() => {
+
+                setPostData(postData.filter((_, i) => i !== index));
+            })
+            .catch((error) => {
+                console.error('Errore nell\'eliminare il post', error);
+            });
     };
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setNewPost(prevState => ({
-            ...prevState, [name]: type === 'checkbox' ? checked : value
+        setNewPost((prevState) => ({
+            ...prevState,
+            [name]: type === 'checkbox' ? checked : value,
         }));
     };
 
@@ -144,7 +154,7 @@ function AppMain() {
             <ul className="list-group">
 
                 {postData.length ? postData.map((post, index) => (
-                    <li key={post.index} className="list-group-item d-flex justify-content-between postCard">
+                    <li key={index} className="list-group-item d-flex justify-content-between postCard">
                         <div>
                             <img src={`http://localhost:3000/imgs/posts/${post.image}`} alt={post.title} />
                             <h5>{post.title}</h5>
