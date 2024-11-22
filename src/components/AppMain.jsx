@@ -1,42 +1,39 @@
 import React, { useState, useEffect } from 'react';
-
-
-/*const basePosts = [
-    {
-        id: 1,
+{
+    id: 1,
         title: "Titolo del Post",
-        image: './images/1.jpg',
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
+            image: './images/1.jpg',
+                content:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
         tags: ["html", "css"],
-        published: true,
+            published: true,
     },
-    {
-        id: 2,
+{
+    id: 2,
         title: "Titolo del Post",
-        image: './images/2.jpg',
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
+            image: './images/2.jpg',
+                content:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
         tags: ["js", "css"],
-        published: true,
+            published: true,
     },
-    {
-        id: 3,
+{
+    id: 3,
         title: "Titolo del Post",
-        image: './images/3.jpg',
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
+            image: './images/3.jpg',
+                content:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
         tags: ["js", "php"],
-        published: true,
+            published: true,
     },
-    {
-        id: 4,
+{
+    id: 4,
         title: "Titolo del Post",
-        image: './images/4.jpg',
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
+            image: './images/4.jpg',
+                content:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
         tags: ["html"],
-        published: false,
+            published: false,
     },
 ];*/
 
@@ -50,17 +47,14 @@ function AppMain() {
         published: false,
     });
 
-
-
     function fetchData(url = 'http://localhost:3000/posts') {
         fetch(url)
             .then(resp => resp.json())
             .then(data => {
 
                 setPostData(data.data);
-                console.log(data.data);
-
             })
+
             .catch(error => {
                 console.error('Errore nel recuperare i post', error);
             });
